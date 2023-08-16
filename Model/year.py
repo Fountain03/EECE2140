@@ -36,15 +36,6 @@ class Year:
         """
         self.get_month(task.get_month()).add_task(task)
 
-    def update(self, task):
-        """Updates to remove the given task in this year
-
-        Args:
-            task (Task): the completed task to remove
-        """
-        for m in self.months.values():
-            m.update(task)
-
     def __str__(self) -> str:
         s = ''
         for m, month in self.months.items():

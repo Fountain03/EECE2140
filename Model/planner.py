@@ -36,14 +36,3 @@ class Calendar:
         else:
             self.years[task.get_year()] = Year(task.get_year())
             self.get_year(task.get_year()).add_task(task)
-
-    def update(self, task):
-        """Updates the given task to be complete
-
-        Args:
-            task (_type_): a Task object which has been 
-            completed by the user
-        """
-        task.make_done()
-        for y in self.years:
-            y.update(task)

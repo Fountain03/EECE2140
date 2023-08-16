@@ -40,15 +40,6 @@ class Month:
         """
         self.get_day(task.get_day()).add_task(task)
 
-    def update(self, task):
-        """Updates this month with the given task's information
-
-        Args:
-            task (Task): the Task to update
-        """
-        for d in self.days.values():
-            d.update(task)
-
     def __str__(self) -> str:
         s = ''
         for d, day in self.days.items():
