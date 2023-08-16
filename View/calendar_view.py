@@ -157,10 +157,9 @@ class CalendarView():
         title_label.pack(side=tk.LEFT)
         title_entry = tk.Entry(master=f1)
         title_entry.pack(side=tk.RIGHT)
-        title = title_entry.get()
 
         f2 = tk.Frame(new_window)
-        date_label = tk.Label(master=f2, text='Date')
+        date_label = tk.Label(master=f2, text='Date D/M/YYYY')
         date_label.pack(side=tk.LEFT)
         day_entry = tk.Entry(master=f2, width=2)
         month_entry = tk.Entry(master=f2, width=2)
@@ -174,13 +173,14 @@ class CalendarView():
         desc_label.pack(side=tk.LEFT)
         desc_entry = tk.Entry(master=f3)
         desc_entry.pack(side=tk.RIGHT)
-        desc = desc_entry.get()
 
         f1.pack()
         f2.pack()
         f3.pack()
 
         def accept():
+            title = title_entry.get()
+            desc = desc_entry.get()
             year = int(year_entry.get())
             month = int(month_entry.get())
             day = int(day_entry.get())

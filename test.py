@@ -18,9 +18,7 @@ r = Reminder('Make Dinner', 2023, 8, 8)
 to = ToDo('Project', 2023, 8, 16, 'EECE2140 project')
 day.add_task(m)
 day.add_task(r)
+day.add_task(to)
 
-m.make_done()
-day.update(m)
-
-for t in day.get_tasks():
-    print(t)
+d = DayView(day)
+d.schedule()

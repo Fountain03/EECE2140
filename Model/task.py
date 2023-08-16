@@ -47,4 +47,4 @@ class Task(ABC):
         self.done = True
 
     def __str__(self) -> str:
-        return f'{self.title}:\n'\
+        return f'{self.title}\n'\
