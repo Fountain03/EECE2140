@@ -1,5 +1,5 @@
-from month import Month
-from day import Day
+from Model.month import Month
+from Model.day import Day
 
 
 class Year:
@@ -34,7 +34,7 @@ class Year:
         Args:
             task (Task): the Task to add to this year
         """
-        self.get_month(task.get_month).add_task(task)
+        self.get_month(task.get_month()).add_task(task)
 
     def update(self, task):
         """Updates to remove the given task in this year
@@ -42,5 +42,11 @@ class Year:
         Args:
             task (Task): the completed task to remove
         """
-        for m in self.months.values:
+        for m in self.months.values():
             m.update(task)
+
+    def __str__(self) -> str:
+        s = ''
+        for m, month in self.months.items():
+            s += f'{m}/{self.year}\n{str(month)}'
+        return s

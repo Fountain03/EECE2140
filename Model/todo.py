@@ -1,4 +1,4 @@
-from task import Task
+from Model.task import Task
 
 
 class ToDo(Task):
@@ -16,3 +16,7 @@ class ToDo(Task):
         """
         super().__init__(title, year, month, day)
         self.desc = desc
+
+    def __str__(self) -> str:
+        return super().__str__() +\
+            f'{self.desc}'

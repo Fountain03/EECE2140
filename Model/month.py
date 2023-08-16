@@ -1,5 +1,5 @@
 import datetime
-from day import Day
+from Model.day import Day
 
 
 class Month:
@@ -38,7 +38,7 @@ class Month:
         Args:
             task (Task): the Task to add to this month
         """
-        self.get_day(task.get_day).add_task(task)
+        self.get_day(task.get_day()).add_task(task)
 
     def update(self, task):
         """Updates this month with the given task's information
@@ -46,5 +46,12 @@ class Month:
         Args:
             task (Task): the Task to update
         """
-        for d in self.days.values:
+        for d in self.days.values():
             d.update(task)
+
+    def __str__(self) -> str:
+        s = ''
+        for d, day in self.days.items():
+            if bool(day.get_tasks()):
+                s += f'{self.month}/{d}: \n{str(day)}'
+        return s

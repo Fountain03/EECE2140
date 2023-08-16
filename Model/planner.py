@@ -1,8 +1,8 @@
 import datetime
-from month import Month
-from day import Day
-from year import Year
-from task import Task
+from Model.month import Month
+from Model.day import Day
+from Model.year import Year
+from Model.task import Task
 
 
 class Calendar:
@@ -21,6 +21,8 @@ class Calendar:
         Returns:
             Year: The year in the calendar
         """
+        if year not in self.years:
+            raise ValueError('Nothing planned for year')
         return self.years[year]
 
     def add_task(self, task: Task):
@@ -45,8 +47,3 @@ class Calendar:
         task.make_done()
         for y in self.years:
             y.update(task)
-
-
-cal = Calendar()
-t = Task('Task', 2020, 2, 15)
-cal.add_task(t)

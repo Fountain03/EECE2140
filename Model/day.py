@@ -24,7 +24,7 @@ class Day:
         Returns:
             list[Tasks]: the tasks that are assigned on this day
         """
-        return self.tasks.values
+        return self.tasks.values()
 
     def update(self, task):
         """Given a task, removes the task from the list
@@ -34,4 +34,10 @@ class Day:
         """
         if task.title in self.tasks:
             if task.done:
-                del self.tasks[task]
+                del self.tasks[task.title]
+
+    def __str__(self):
+        s = ''
+        for t in self.get_tasks():
+            s += str(t) + '\n'
+        return s

@@ -1,7 +1,8 @@
 import datetime
+from abc import ABC
 
 
-class Task:
+class Task(ABC):
     """This class represents a task/event to be shown on the calendar"""
 
     def __init__(self, title: str, year, month, day) -> None:
@@ -44,3 +45,6 @@ class Task:
     def make_done(self):
         """Marks the task as completed/passed"""
         self.done = True
+
+    def __str__(self) -> str:
+        return f'{self.title}:\n'\

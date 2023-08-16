@@ -1,4 +1,4 @@
-from task import Task
+from Model.task import Task
 
 
 class Reminder(Task):
