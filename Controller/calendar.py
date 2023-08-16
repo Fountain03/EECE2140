@@ -5,5 +5,8 @@ from View.calendar_view import CalendarView
 class Controller:
 
     def __init__(self, cv) -> None:
-        self.cv = cv
-        cv.menu()
+
+        with open(cv, 'rb') as f:
+            cal = pickle.load(f)
+        self.cv = CalendarView(cal)
+        self.cv.menu()
