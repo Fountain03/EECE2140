@@ -6,6 +6,8 @@ from View.calendar_view import CalendarView
 from Model.date import Date
 from View.daily_view import DailyView
 from View.meeting_view import MeetingView
+from View.weekly_view import WeekView
+from View.daily_view import DailyView
 import pickle
 import datetime
 import tkinter as tk
@@ -15,9 +17,8 @@ c1 = Calendar()
 m = Meeting('Interview', 2023, 8, 20, 'job interview', 3, 'Teams', '2:30')
 r = Reminder('Make Dinner', 2023, 8, 20)
 to = ToDo('Project', 2023, 8, 20, 'EECE2140 project')
-day = datetime.date(2023, 8, 20)
+day = datetime.date(2023, 7, 20)
 date = Date(day)
-date.add_task(m)
 c1.add_task(m)
 c1.add_task(to)
 c1.add_task(r)

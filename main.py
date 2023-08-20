@@ -4,4 +4,4 @@ from Model.planner import Calendar
 import pickle
 
 
-c = Controller('cal.dat')
+c = Controller()

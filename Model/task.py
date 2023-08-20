@@ -42,9 +42,9 @@ class Task(ABC):
         """
         return self.date.year
 
-    def make_done(self):
-        """Marks the task as completed/passed"""
-        self.done = True
-
     def __str__(self) -> str:
         return f'{self.title}\n'\
+
+
+    def make_done(self):
+        self.done = True

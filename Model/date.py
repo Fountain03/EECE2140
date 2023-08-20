@@ -12,11 +12,18 @@ class Date:
         self.tasks.append(task)
 
     def remove_task(self, task):
-        if task.done:
-            self.tasks.remove(task)
+        self.tasks.remove(task)
+
+    def update(self):
+        for t in self.tasks:
+            if t.date != self.date:
+                self.tasks.remove(t)
 
     def __str__(self):
         s = f'{str(self.date)}\n'
-        for t in self.tasks:
-            s += str(t) + '\n'
-        return s
+        if self.tasks == {}:
+            return s + 'No tasks today!'
+        else:
+            for t in self.tasks:
+                s += str(t) + '\n'
+            return s

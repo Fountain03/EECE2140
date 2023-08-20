@@ -14,10 +14,11 @@ import pickle
 
 class CalendarView():
 
-    def __init__(self, cal) -> None:
+    def __init__(self, cal, dat='cal.dat') -> None:
         self.cal = cal
+        self.dat = dat
         self.page = tk.Tk()
-        self.page.title('Calendar View')
+        self.page.title(f'Calendar: saved to {self.dat}')
         self.page.geometry('500x300')
 
     def daily_view(self):
@@ -38,8 +39,8 @@ class CalendarView():
             month = int(month_entry.get())
             day = int(day_entry.get())
             d = datetime.date(year, month, day)
-            date = self.cal.dates[d]
-            dv = DailyView(date)
+            date = self.cal.get_date(d)
+            dv = DailyView(date, self, self.dat)
             dv.display()
         search = tk.Button(new, text='search',
                            command=accept)
@@ -48,19 +49,19 @@ class CalendarView():
     def new_remind(self):
         rv = ReminderView(None)
         rv.create(self.cal)
-        with open('cal.dat', 'wb') as f:
+        with open(self.dat, 'wb') as f:
             pickle.dump(self.cal, f)
 
     def new_meeting(self):
         mv = MeetingView(None)
         mv.create(self.cal)
-        with open('cal.dat', 'wb') as f:
+        with open(self.dat, 'wb') as f:
             pickle.dump(self.cal, f)
 
     def new_todo(self):
         tv = ToDoView(None)
         tv.create(self.cal)
-        with open('cal.dat', 'wb') as f:
+        with open(self.dat, 'wb') as f:
             pickle.dump(self.cal, f)
 
     def menu(self):
@@ -74,15 +75,10 @@ class CalendarView():
         daily = tk.Button(text='Day View', height=3,
                           width=15, command=self.daily_view)
         today = tk.Button(text='Today', height=3, width=15,
-                          command=lambda: DailyView(self.cal.get_date(td)).display())
+                          command=lambda: DailyView(self.cal.get_date(td), self.cal, self.dat).display())
         remind.pack()
         todo.pack()
         meeting.pack()
         daily.pack()
         today.pack()
-
-        def on_close():
-
-            self.page.destroy()
-        self.page.protocol('WM_DELETE_WINDOW', on_close)
         self.page.mainloop()

@@ -26,7 +26,8 @@ class Calendar:
         if date in self.dates:
             return self.dates[date]
         else:
-            raise ValueError('No entries yet')
+            self.dates[date] = Date(date)
+            return self.dates[date]
 
     def print_day(self, date):
         print(self.dates[date])
@@ -41,8 +42,8 @@ class Calendar:
     def today(self):
         return self.dates[datetime.date.today()]
 
-    def next_week(self, date):
-        iso = date.isocalendar()
-        week = datetime.date.fromisocalendar(
-            iso.year, iso.week + 1, iso.weekday)
-        return week
+    def update(self):
+        for d in self.dates.values():
+            for t in d.tasks:
+                if t.date != d.date:
+                    d.remove_task(t)

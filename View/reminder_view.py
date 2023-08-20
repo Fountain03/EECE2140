@@ -40,7 +40,7 @@ class ReminderView(TaskView):
                                command=accept)
         new_button.pack(side=tk.BOTTOM)
 
-    def edit(self):
+    def edit(self, button):
         f1 = tk.Frame(self.disp)
         title_label = tk.Label(master=f1, text='Title')
         title_label.pack(side=tk.LEFT)
@@ -69,6 +69,7 @@ class ReminderView(TaskView):
             month = int(month_entry.get())
             day = int(day_entry.get())
             self.task.date = datetime.date(year, month, day)
+            button['text'] = str(self.task)
             self.disp.destroy()
 
         new_button = tk.Button(self.disp, text='save',

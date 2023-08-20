@@ -1,5 +1,6 @@
 from Model.meeting import Meeting
 from View.task_view import TaskView
+from Model.date import Date
 import tkinter as tk
 import datetime
 
@@ -74,7 +75,7 @@ class MeetingView(TaskView):
                                command=accept)
         new_button.pack(side=tk.BOTTOM)
 
-    def edit(self):
+    def edit(self, button, date, cal):
         f1 = tk.Frame(self.disp)
         title_label = tk.Label(master=f1, text='Title')
         title_label.pack(side=tk.LEFT)
@@ -139,7 +140,13 @@ class MeetingView(TaskView):
             year = int(year_entry.get())
             month = int(month_entry.get())
             day = int(day_entry.get())
-            self.task.date = datetime.date(year, month, day)
+
+            if self.task.date != datetime.date(year, month, day):
+                self.task.date = datetime.date(year, month, day)
+                d = Date(self.task.date)
+                cal.add_task(self.task)
+                date.update()
+            button['text'] = str(self.task)
             self.disp.destroy()
 
         new_button = tk.Button(self.disp, text='save',
