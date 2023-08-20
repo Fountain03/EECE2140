@@ -33,7 +33,7 @@ class Meeting(Task):
         while min >= 60:
             min -= 60
             hour += 1
-        return f'{hour}:{min: 03d}'
+        return f'{hour}' + ':' + f'{min:02d}'
 
     def __str__(self) -> str:
         return super().__str__() +\

@@ -1,8 +1,6 @@
 import datetime
-from Model.month import Month
-from Model.day import Day
-from Model.year import Year
 from Model.task import Task
+from Model.date import Date
 
 
 class Calendar:
@@ -10,20 +8,7 @@ class Calendar:
 
     def __init__(self) -> None:
         """Creates a Calendar object"""
-        self.years = {}
-
-    def get_year(self, year: int):
-        """Given a year int, returns the Year object
-
-        Args:
-            year (int): the year to return
-
-        Returns:
-            Year: The year in the calendar
-        """
-        if year not in self.years:
-            raise ValueError('Nothing planned for year')
-        return self.years[year]
+        self.dates = {}
 
     def add_task(self, task: Task):
         """Adds the given task to the calendar
@@ -31,8 +16,33 @@ class Calendar:
         Args:
             task (Task): a Task object to be shown in the calendar
         """
-        if task.get_year() in self.years:
-            self.get_year(task.get_year()).add_task(task)
+        if task.date in self.dates:
+            self.dates[task.date].add_task(task)
         else:
-            self.years[task.get_year()] = Year(task.get_year())
-            self.get_year(task.get_year()).add_task(task)
+            self.dates[task.date] = Date(task.date)
+            self.dates[task.date].add_task(task)
+
+    def get_date(self, date):
+        if date in self.dates:
+            return self.dates[date]
+        else:
+            raise ValueError('No entries yet')
+
+    def print_day(self, date):
+        print(self.dates[date])
+
+    def print_tasks(self) -> str:
+        for d in self.dates.values():
+            print(d)
+
+    def sort_dates(self):
+        return sorted(self.dates)
+
+    def today(self):
+        return self.dates[datetime.date.today()]
+
+    def next_week(self, date):
+        iso = date.isocalendar()
+        week = datetime.date.fromisocalendar(
+            iso.year, iso.week + 1, iso.weekday)
+        return week
