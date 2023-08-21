@@ -89,7 +89,7 @@ class MeetingView(TaskView):
                                command=accept)
         new_button.pack(side=tk.BOTTOM)
 
-    def edit(self, button, date, cal):
+    def edit(self, button, cal):
         """Allows the user to edit an existing meeting 
 
         Args:
