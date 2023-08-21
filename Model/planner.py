@@ -43,7 +43,7 @@ class Calendar:
         Returns:
             Date: Date object for today
         """
-        return self.dates[datetime.date.today()]
+        return self.get_date(datetime.date.today())
 
     def update(self):
         """If tasks in any date do not have the matching date, 

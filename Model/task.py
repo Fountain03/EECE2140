@@ -18,30 +18,6 @@ class Task(ABC):
         self.date = datetime.date(year, month, day)
         self.done = False
 
-    def get_day(self):
-        """Returns the task's day of occurrence
-
-        Returns:
-            int: the day the task is assigned to
-        """
-        return self.date.day
-
-    def get_month(self):
-        """Returns the task's month of occurrence
-
-        Returns:
-            int: the month the task is assigned to
-        """
-        return self.date.month
-
-    def get_year(self):
-        """Returns the task's year of occurrence
-
-        Returns:
-            int: the year the task is assigned to
-        """
-        return self.date.year
-
     def __str__(self) -> str:
         """Return a string containing information about the task
 

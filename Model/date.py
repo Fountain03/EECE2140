@@ -43,9 +43,24 @@ class Date:
             str: string with date and tasks
         """
         s = f'{str(self.date)}\n'
-        if self.tasks == {}:
+        if self.tasks == []:
             return s + 'No tasks today!'
         else:
             for t in self.tasks:
                 s += str(t) + '\n'
             return s
+
+    def __eq__(self, __value: object) -> bool:
+        """Compares two objects and checks if they are equal
+
+        Args:
+            __value (object): the compared object
+
+        Returns:
+            bool: if this object and the other object are equal
+        """
+
+        if isinstance(__value, Date):
+            if self.date == __value.date and self.tasks == __value.tasks:
+                return True
+            return False
