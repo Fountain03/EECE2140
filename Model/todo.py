@@ -18,5 +18,11 @@ class ToDo(Task):
         self.desc = desc
 
     def __str__(self) -> str:
+        """Return a string containing information regarding 
+           information about task
+
+        Returns:
+            str: String with title and description of task
+        """
         return super().__str__() +\
             f'{self.desc}'

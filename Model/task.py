@@ -43,8 +43,14 @@ class Task(ABC):
         return self.date.year
 
     def __str__(self) -> str:
+        """Return a string containing information about the task
+
+        Returns:
+            str: String with title of the task
+        """
         return f'{self.title}\n'\
 
 
     def make_done(self):
+        """Make this task marked as done"""
         self.done = True

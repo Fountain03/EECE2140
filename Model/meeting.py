@@ -25,6 +25,11 @@ class Meeting(Task):
         self.start = time
 
     def full_time(self):
+        """Calculate the end time of the meeting
+
+        Returns:
+            str: time notation for the end of meeting
+        """
         length = self.duration * 60
         hour, min = self.start.split(':')
         hour = int(hour)
@@ -36,6 +41,11 @@ class Meeting(Task):
         return f'{hour}' + ':' + f'{min:02d}'
 
     def __str__(self) -> str:
+        """
+
+        Returns:
+            str: String containing the information regarding meeting
+        """
         return super().__str__() +\
             f'{self.desc}\n'\
             f'{self.start}-{self.full_time()}\n'\

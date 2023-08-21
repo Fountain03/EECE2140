@@ -23,27 +23,31 @@ class Calendar:
             self.dates[task.date].add_task(task)
 
     def get_date(self, date):
+        """Return a specific Date object
+
+        Args:
+            date (datetime): the desired date
+
+        Returns:
+            Date: Date object with given date
+        """
         if date in self.dates:
             return self.dates[date]
         else:
             self.dates[date] = Date(date)
             return self.dates[date]
 
-    def print_day(self, date):
-        print(self.dates[date])
-
-    def print_tasks(self) -> str:
-        for d in self.dates.values():
-            print(d)
-
-    def sort_dates(self):
-        return sorted(self.dates)
-
     def today(self):
+        """Return the Date object for today's date
+
+        Returns:
+            Date: Date object for today
+        """
         return self.dates[datetime.date.today()]
 
     def update(self):
+        """If tasks in any date do not have the matching date, 
+            remove them from that Date
+        """
         for d in self.dates.values():
-            for t in d.tasks:
-                if t.date != d.date:
-                    d.remove_task(t)
+            d.update()

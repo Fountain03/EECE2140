@@ -11,8 +11,16 @@ import pickle
 
 
 class DailyView():
+    """This class represents a GUI display for a given Day"""
 
     def __init__(self, day, cal, dat) -> None:
+        """Create a GUI object for day view
+
+        Args:
+            day (Day): the day to display
+            cal (Calendar): the calendar being used
+            dat (str): the file to save data to
+        """
         self.day = day
         self.disp = tk.Tk()
         self.disp.title(f'Daily View: {self.day.date}')
@@ -20,6 +28,7 @@ class DailyView():
         self.dat = dat
 
     def display(self):
+        """Display the tasks in the given day"""
         if len(self.day.tasks) == 0:
             msg = tk.Label(self.disp, text='No tasks for today!')
             msg.pack()
@@ -29,7 +38,15 @@ class DailyView():
         self.disp.mainloop()
 
     def task_list(self, task):
+        """For a given task, display a button which will allow for editing
+            and a checkbox to mark as complete and remove it
+
+        Args:
+            task (Task): a given task
+        """
         def complete():
+            """If a checkbox is marked, make the task done and remove it
+                from the calendar"""
             if var.get() == 1:
                 task.make_done()
             else:
@@ -44,15 +61,17 @@ class DailyView():
         t_button = tk.Button(master=f, text=str(task))
 
         def edit():
+            """If a button is clicked, allow the user to modify the task
+                information"""
             if isinstance(task, Meeting):
                 tv = MeetingView(task)
-                tv.edit(t_button, self.day, self.cal)
+                tv.edit(t_button, self.cal)
             if isinstance(task, Reminder):
                 tv = ReminderView(task)
-                tv.edit(t_button, self.day)
+                tv.edit(t_button, self.cal)
             if isinstance(task, ToDo):
                 tv = ToDoView(task)
-                tv.edit(t_button, self.day)
+                tv.edit(t_button, self.cal)
             with open(self.dat, 'wb') as f:
                 pickle.dump(self.cal, f)
 

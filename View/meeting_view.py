@@ -6,11 +6,23 @@ import datetime
 
 
 class MeetingView(TaskView):
+    """This class represents the GUI for a meeting task"""
 
     def __init__(self, task) -> None:
+        """Creates a Meeting view GUI object
+
+        Args:
+            task (Task): the given meeting
+        """
         super().__init__(task)
 
     def create(self, cal):
+        """Allows the user to create a new meeting via GUI
+
+        Args:
+            cal (Calendar): the calendar the meeting will be added to
+        """
+        # Provides necessary information from user to create object
         f1 = tk.Frame(self.disp)
         title_label = tk.Label(master=f1, text='Title')
         title_label.pack(side=tk.LEFT)
@@ -20,8 +32,8 @@ class MeetingView(TaskView):
         f2 = tk.Frame(self.disp)
         date_label = tk.Label(master=f2, text='Date M/D/YYYY')
         date_label.pack(side=tk.LEFT)
-        day_entry = tk.Entry(master=f2, width=2)
         month_entry = tk.Entry(master=f2, width=2)
+        day_entry = tk.Entry(master=f2, width=2)
         year_entry = tk.Entry(master=f2, width=4)
         month_entry.pack(side=tk.LEFT)
         day_entry.pack(side=tk.LEFT)
@@ -59,6 +71,8 @@ class MeetingView(TaskView):
         f6.pack()
 
         def accept():
+            """Compiles information and creates new meeting
+            """
             dur = int(dur_entry.get())
             time = time_entry.get()
             desc = desc_entry.get()
@@ -76,6 +90,14 @@ class MeetingView(TaskView):
         new_button.pack(side=tk.BOTTOM)
 
     def edit(self, button, date, cal):
+        """Allows the user to edit an existing meeting 
+
+        Args:
+            button (Button): the visual for the meeting that will be updated
+            cal (Calendar): the calendar the meeting is a part of
+        """
+        # Display the existing information for the meeting
+        # Allows user to change information directly
         f1 = tk.Frame(self.disp)
         title_label = tk.Label(master=f1, text='Title')
         title_label.pack(side=tk.LEFT)
@@ -131,6 +153,7 @@ class MeetingView(TaskView):
         f5.pack()
         f6.pack()
 
+        # Compiles information into meeting object
         def accept():
             self.task.duration = int(dur_entry.get())
             self.task.start = time_entry.get()
@@ -141,11 +164,11 @@ class MeetingView(TaskView):
             month = int(month_entry.get())
             day = int(day_entry.get())
 
+            # If date is changed, move meeting to new date
             if self.task.date != datetime.date(year, month, day):
                 self.task.date = datetime.date(year, month, day)
-                d = Date(self.task.date)
                 cal.add_task(self.task)
-                date.update()
+                cal.update()
             button['text'] = str(self.task)
             self.disp.destroy()
 
